@@ -3,7 +3,7 @@ package com.JoL.JRPG;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import com.JoL.JRPG.map.Map3D;
+import com.JoL.JRPG.graphics.map.Map3D;
 
 public class Screen {
 	public int width, height;

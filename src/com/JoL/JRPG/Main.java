@@ -9,6 +9,8 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.JoL.JRPG.graphics.Images;
+
 public class Main extends Canvas implements Runnable {
 	public static int WIDTH = 640, HEIGHT = 480;
 	
@@ -21,6 +23,9 @@ public class Main extends Canvas implements Runnable {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
 		 
 		setSize(size);
+		
+		//Load all images
+		new Images();
 		 
 		screen = new Screen(WIDTH, HEIGHT);
 	}
