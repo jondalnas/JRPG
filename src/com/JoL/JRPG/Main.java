@@ -50,17 +50,27 @@ public class Main extends Canvas implements Runnable {
 	static double deltaTime = 0;
 	public void run() {
 		long last = System.nanoTime();
-		byte frames = 0;
+		long lastAcc = last;
+		int frames = 0;
 		double accDeltaTime = 0;
 		while(running) {
 			deltaTime = System.nanoTime() - last;
 			accDeltaTime += deltaTime;
+			last = System.nanoTime();
 			
 			tick();
 			render();
 			
 			frames++;
-			if (frames > 60) {
+			
+			if (System.nanoTime() - lastAcc >= 1e9) {
+				System.out.println("FPS: " + frames);
+				
+				lastAcc = System.nanoTime();
+				frames = 0;
+			}
+			
+			/*if (frames > 60) {
 				try {
 					Thread.sleep((int) ((1.0 - (accDeltaTime > 1 ? 1 : accDeltaTime))*1000.0));
 				} catch (InterruptedException e) {
@@ -68,12 +78,12 @@ public class Main extends Canvas implements Runnable {
 				}
 				
 				accDeltaTime = 0;
-			}
+			}*/
 		}
 	}
 	
 	public static double deltaTime() {
-		return deltaTime;
+		return deltaTime * 1e-9;
 	}
 	 
 	private void tick() {
