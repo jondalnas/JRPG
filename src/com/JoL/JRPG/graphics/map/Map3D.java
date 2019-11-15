@@ -29,35 +29,31 @@ public class Map3D {
 			pixels[i] = 0xffffff;
 		}
 		
-		double i = Math.sin(time) * Math.PI;
+		double i = (Math.sin(time) + 1) * Math.PI * 0.001;
 		
-		render3D(Images.test, i);
+		render3D(Images.denmark, i, 1, (Math.sin(i * 1000) + 1) * Images.denmark.width / 2, (Math.cos(i * 1000) + 1) * Images.denmark.height / 2);
+		//render3D(Images.denmark, 0.001, 3, Images.denmark.width / 2, Images.denmark.height / 2);
 		
 		g.drawImage(img, 0, 0, width, height, null);
 	}
 	
-	private void render3D(Bitmap map, double tilt) {
-		double yOffs = (Math.sin(tilt)) * 100.0;
-		double xOffs = Math.cos(tilt) * 100.0;
+	private void render3D(Bitmap map, double tilt, double zoom, double xOffs, double yOffs) {
+		int h = height / 2;
+		int w = width / 2;
 		
-		for (int y = 0; y < map.height; y++) {
-			double scale = (y*0.01 + 1) / 2;
+		for (int y = 0; y < height; y++) {
+			double scale = 1.0 / ((y - h) * tilt + zoom);
 			
-			int yPix = (int) ((y + (int) yOffs) / (scale * 2));
-			int yy = y;// - (int) ((Math.sin(i) + 1) * 500);
+			if (scale < 0) continue;
 			
-			if (yy < 0 || yy >= height || yPix < 0 || yPix >= map.height) continue;
+			int yPix = (int) ((y - h) * scale + yOffs);
+			if (yPix < 0 || yPix >= map.height) continue;
 			
-			double mapWidth = map.width * scale;
-			
-			for (int x = (int) -mapWidth; x < mapWidth; x++) {
-				int xx = x + width / 2;
-				if (xx < 0 || xx >= width) continue;
-				
-				int xPix = (int) (((x - xOffs) + mapWidth) / (scale * 2));
+			for (int x = 0; x < width; x++) {
+				int xPix = (int) ((x - w) * scale + xOffs);
 				if (xPix < 0 || xPix >= map.width) continue;
 				
-				pixels[xx+yy*width] = map.pixels[xPix+yPix*map.width];
+				pixels[x+y*width] = map.pixels[xPix+yPix*map.width];
 			}
 		}
 	}
