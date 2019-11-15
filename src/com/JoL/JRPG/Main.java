@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Main extends Canvas implements Runnable {
+	private static final long serialVersionUID = 1L;
+
 	public static int WIDTH = 640, HEIGHT = 480;
 	
 	private boolean running;

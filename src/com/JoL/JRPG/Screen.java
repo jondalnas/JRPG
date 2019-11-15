@@ -15,6 +15,6 @@ public class Screen {
 		g.setColor(Color.white);
 		g.fillRect(0, 0, width, height);
 		g.setColor(Color.blue);
-		g.fillRect(50, 50, width-50, height-50);
+		
 	}
 }
