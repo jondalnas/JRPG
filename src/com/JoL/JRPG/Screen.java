@@ -3,17 +3,15 @@ package com.JoL.JRPG;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import com.JoL.JRPG.graphics.map.Map3D;
-
 public class Screen {
 	public int width, height;
-	private Map3D map;
+	public Map map;
 	
 	public Screen(int w, int h) {
 		width = w;
 		height = h;
 		
-		map = new Map3D(w, h);
+		map = new Map(w, h);
 	}
 
 	public void render(Graphics g) {

@@ -18,11 +18,15 @@ public class Main extends Canvas implements Runnable {
 	private Thread thread;
 	
 	private Screen screen;
+	private Input input;
 	
 	public Main() {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
 		 
 		setSize(size);
+		
+		input = new Input();
+		addKeyListener(input);
 		
 		//Load all images
 		new Images();
@@ -87,6 +91,7 @@ public class Main extends Canvas implements Runnable {
 	}
 	 
 	private void tick() {
+		screen.map.tick();
 	}
  
 	private void render() {

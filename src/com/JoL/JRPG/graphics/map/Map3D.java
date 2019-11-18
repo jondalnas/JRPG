@@ -22,17 +22,12 @@ public class Map3D {
 		pixels = ((DataBufferInt) img.getRaster().getDataBuffer()).getData();
 	}
 	
-	double time;
-	public void render(Graphics g) {
-		time += Main.deltaTime();
+	public void render(Graphics g, double playerX, double playerY) {
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = 0xffffff;
 		}
 		
-		double i = (Math.sin(time) + 1) * Math.PI * 0.001;
-		
-		render3D(Images.denmark, i, 1, (Math.sin(i * 1000) + 1) * Images.denmark.width / 2, (Math.cos(i * 1000) + 1) * Images.denmark.height / 2);
-		//render3D(Images.denmark, 0.001, 3, Images.denmark.width / 2, Images.denmark.height / 2);
+		render3D(Images.map, 0.01, 4, playerX, playerY);
 		
 		g.drawImage(img, 0, 0, width, height, null);
 	}
